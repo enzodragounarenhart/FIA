@@ -40,6 +40,10 @@ def fs_function(soma):
         FSSum = y
         return FSSum
 
+def calculate_sum(inputs, sums):
+    #Realiza a soma dos inputs com os pesos
+    return sum(x * y for x, y in zip(inputs, sums))
+
 #Pega os inputs
 inputN = int(input(print("How many inputs?")))
 
@@ -51,19 +55,12 @@ while i<inputN:
 i = 0
 #pega os sums
 sumN = int(input(print("How many sums?")))
-if sumN == 0:
-    summed = sum(inputs)
-else:
-    while i<sumN:
-        sums.append(int(input(print("Write a sum value: "))))
-        i+=1
+while i<sumN:
+    sums.append(int(input(print("Write a sum value: "))))
+    i+=1
 i = 0
 
-#Realiza a soma dos inputs com os pesos
-if sumN == 0:
-    print(summed)
-else:
-    summed = sum(x * y for x, y in zip(inputs, sums))
+summed = calculate_sum(inputs, sums)
 
 print(f"Result of LR Function: {lr_function(summed)}")
 print(f"Result of FR Function: {fr_function(summed)}")
@@ -71,8 +68,7 @@ print(f"Result of FS Function: {fs_function(summed)}")
 
 #Caso necessitar, continua o programa para calcular mais expressões, só suporta uma soma
 print("Continue?(Y/N)")
-cont = input()
-cont.capitalize()
+cont = input().capitalize()
 if cont == 'Y':
     sumCont = []
     print("Write a sum value")
