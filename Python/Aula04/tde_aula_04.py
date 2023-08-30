@@ -12,9 +12,8 @@ def calculate_sum(inputs, weights):
     #Realiza a soma dos inputs com os pesos
     return sum(x * y for x, y in zip(inputs, weights))
 
-
 #FUNÇÃO DE AJUSTE UTILIZANDO A REGRA DELTA:
-def fun_ajuste(inputs, weights, so, sd, qtd):
+def fun_ajuste(inputs, weights, so, sd):
     w1, w2 = weights
     y = 0
     
@@ -38,8 +37,8 @@ print("Digite os pesos iniciais(separados por espaço): ")
 ent = input().split()
 
 for num in ent:
-        number = int(num)
-        weights.append(number)
+    number = int(num)
+    weights.append(number)
 
 i = 0
 
