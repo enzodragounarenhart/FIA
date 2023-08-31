@@ -1,22 +1,22 @@
-x0 = 0
-y0 = 0
-x1 = 0
-y1 = 1
-x2 = 1
-y2 = 0
-x3 = 1
-y3 = 1
+ent1 = [0, 0, 1]
+ent2 = [0, 1, 1]
+ent3 = [1, 0, 1]
+ent4 = [1, 1, 1]
+
+
+entradas = [ent1, ent2, ent3, ent4]
 
 s0 = 0
 s1 = 1
 
-def fun_ajuste(_x, _y, sd, so, p1, p2):
+def fun_ajuste(entrada, sd, so, pesos):
 
     
-    p1_aj = p1 + 1 * (sd - so) * _x
-    p2_aj = p2 + 1 * (sd - so) * _y
+    p1_aj = pesos[0] + 1 * (sd - so) * entrada[0]
+    p2_aj = pesos[1] + 1 * (sd - so) * entrada[1]
+    p3_aj = pesos[2] + 1 * (sd - so) * entrada[2]
     
-    return [p1_aj, p2_aj]
+    return [p1_aj, p2_aj, p3_aj]
 
 #FUNÇÃO QUE RETORNA O VALOR DA SOMA QUANDO É APLICADA A FUNÇÃO RÁPIDA
 def fr_function(soma):
@@ -28,9 +28,9 @@ def fr_function(soma):
         return 1
     
     #CALCULA E RETORNA A SOMA INICIAL
-def calculate_sum(_x, _y, p1, p2):
+def calculate_sum(entrada: int, peso: int):
     #Realiza a soma dos inputs com os pesos
-    return (_x * p1 ) + (_y * p2)
+    return sum(x * y for x, y in zip(entrada, peso))
 
 print("Digite os pesos: ")
 entrada = input().split()
@@ -43,10 +43,22 @@ for num in entrada:
 
 i = 0
 
-print(calculate_sum(x0,y0, pesos[0], pesos[1]))
+print(calculate_sum(entradas[1], pesos))
 
 
-soma = fr_function(calculate_sum(x0, y0, pesos[0], pesos[1]))
+soma = fr_function(calculate_sum(entradas[1], pesos))
+
+entrada_x = entradas[1]
+print(entrada_x)
+print(fun_ajuste(entradas[1], s0, soma, pesos))
+
+while soma != s1:
+    soma = fr_function(calculate_sum(entradas[1], pesos))
+    pesos = fun_ajuste(entradas[1], s0, soma, pesos)
+    print(pesos)
+    
+        
+    
 
 if soma == s0:
     print("0")
